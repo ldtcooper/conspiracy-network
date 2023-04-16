@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./web/reset.css">
     <link rel="stylesheet" href="./web/index.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -72,16 +74,56 @@
                 target="_blank">Miani et al.</a> and released in 2021.
             By bringing together the text of thousands of articles about hundreds of topics, it enables us to use modern
             techniques in text analysis and natural language processing to study the relationships between these topics.
-
+        </p>
+        <p>
+            If each of the 'paths' that someone can take from conspiracy to conspiracy is a rabbit hole, then we suppose
+            our goal is to map the whole warren.
+            Unlike young rabbits though, we are not going in blind: we have generated a set of hypotheses about how
+            these conspiracies will be linked.
+            These hypotheses come from our groups' long-standing interest in the world of conspiracy theories.
+        </p>
+        <p>
+            In short, we hypothesize the following:
+        <ul>
+            <li>Conspiracy theories will 'cluster' together around certain topics, for example public health, political
+                figures, or phenomena like UFO sightings.</li>
+            <li>These clusters will be linked together by a few 'hub' conspiracies which easily tie into many others:
+                things or people like the New World Order, George Soros, or COVID.</li>
+            <li>Most of these articles will display negative sentiment, e.g. anger or fear.</li>
+        </ul>
         </p>
 
+        <h2>Part Three: Topic Modelling</h2>
+        <div class="iframe-wrapper">
+            <iframe id="topic-map" src="./web/intertopic_distance_map.html" frameborder="0"></iframe>
+        </div>
+
+        <h2>Part Four: Sentiment Analysis</h2>
+
+        <h2>Part Five: Keyword Extraction</h2>
+        <p>
+            Starting with the search terms that Miani et al. used to compile LOCO, we put together a list of 127
+            keywords that captured a number of topics in the conspiracy world.
+            We then used these as so-called "candidate keywords" which we passed to the <a
+                href="https://maartengr.github.io/KeyBERT/index.html" target="_blank">KeyBERT</a> algorithm.
+            In short, KeyBERT uses a large language model to generate word embeddings -- context-aware numerical
+            representations of words -- and then compares those to the list of candidate keywords.
+            If the meaning of the article is close to any of the keywords, then it marks the article as containing that
+            keyword.
+        </p>
+        <p>
+            How does this help us map these theories?
+            With the addition of another algorithm, or rather class of algorithms, called pattern mining.
+            Pattern mining is how sites like Amazon know what to recommend you buy with the items in your cart: by
+            looking at thousands of carts, they might notice the pattern that most people who buy a phone charger put an
+            extra cable in there.
+            We use that same approach here, but with articles instead of shopping carts, and keywords instead of items.
+        </p>
         <div class="iframe-wrapper">
             <iframe id="conspiracy-map" src="./web/conspiracy_map.html" frameborder="0"></iframe>
         </div>
 
-        <div class="iframe-wrapper">
-            <iframe id="topic-map" src="./web/intertopic_distance_map.html" frameborder="0"></iframe>
-        </div>
+
     </main>
 
 </body>

@@ -1,16 +1,40 @@
+html {
+    font-family: "Open Sans";
+}
+
 body {
     margin: 0;
 }
 
+h1 {
+    font-size: 24pt;
+}
+
 header {
-    /* height: 10%;
+    height: 10%;
     background-color: #213741;
-    color: white; */
+    color: white;
+    padding: 10px 10px 10px 5px;
+}
+
+header a {
+    color: white;
+    margin-top: 5px;
 }
 
 main {
     display: flex;
     flex-direction: column;
+    margin: 10px;
+}
+
+h2 {
+    font-size: 16pt;
+    text-decoration: underline;
+}
+
+p {
+    margin: 5px;
 }
 
 .iframe-wrapper {
