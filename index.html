@@ -108,8 +108,11 @@
             Upon generating topics and their associated keywords, conducting sentiment analysis on those keyword sets would be a helpful next step. Besides giving us useful information about what emotions are associated with the topic keywords (and therefore with the articles that include them), we would also be able to identify interesting outliers (if any) in terms of positive sentiment conspiracy theories. We have selected a Hugging Face model to help us do this. It is called distilbert-base-uncased-emotion and for an input string, it displays that string's percentage distribution among 6 different emotions, namely love, joy, sadness, anger, surprise, and fear. We append this percentage distribution as metadata to each of our topic-keyword sets. Finally, for each of our topics, we used their primary emotion i.e. the emotion with the highest percentage to then plot a distribution of that topic versus their primary emotions.
         </p>
         <p>
-            For NMF: 3 topics classified as joy, 5 topics classified as fear, 2 topics classified as anger
+            For NMF: 3 topics classified as joy, 5 topics classified as fear, 2 topics classified as anger.
+        </p>
+        <p>
             For LSA: 3 topics classified as joy, 6 topics classified as fear, 1 topic classified as anger
+        </p>
             For BertTopic: 80 topics classified as joy, 103 topics classified as fear, 77 topics classified as anger, 6 topics classified as sadness 
         </p>
         <p>
