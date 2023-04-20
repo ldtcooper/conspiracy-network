@@ -33,12 +33,16 @@
             We will center our story on one of these people.
             His name is Tom.
             In the midst of all of this chaos, he is stuck at home with nothing but time on his hands.
-            He has been spending a lot of this time on the internet, finding articles to reinforce his notion that
+            He has been spending a lot of this time on the Internet, finding articles to reinforce his notion that
             COVID-19 is less dangerous than we are being led to believe.
+            Despite the mounting evidence and the increasing number of deaths, Tom remains adamant about his beliefs. He refuses to wear masks, practice social distancing, and even getting vaccinated when the vaccines eventually became available. 
             This leads to him not taking precautions: gathering indoors with his friends, not wearing a mask, and
             preemptively announcing that he will not be getting vaccinated.
             When his friends and family try to bring him around, he counters with the articles he's been reading.
             And as he becomes more alienated from his friends and family, he starts to go deeper into his articles.
+        </p>
+        <p>
+            In one incident, Tom attended a large social gathering and contracted COVID-19. Despite experiencing severe symptoms, he refused to get tested or seek medical attention, believing that the virus was not real. As a result, he unknowingly spread the virus to several people at the gathering, including a vulnerable elderly woman who later passed away due to complications from the virus. Tom's actions did not stop there. He continued to spread misinformation and conspiracy theories about the virus on social media and to anyone who would listen. His behavior not only put his loved ones at risk but also contributed to the overall spread of the virus, which led to many more deaths and illnesses. Furthermore, as Tom started to go deeper into conspiracies involving COVID-19, he was exposed to even more theories. For example, he started believing an article he saw about the vaccine being a way for governments to control the populations of their countries. That led him to articles about how the deep state and illuminati are controlling those governments. Then, after the 2020 election, all of those sources started printing articles about how nefarious forces were trying to steal the election, and started pushing people to show up at the U.S. Capitol on January 6th, 2021.
         </p>
         <p>
             The thing is, these articles don't end with "COVID is overblown."
@@ -51,6 +55,7 @@
             To usher in the New World Order.
             How can we stop that?
             We can show up at the Capitol on January 6th to Stop the Steal!
+            So, there was a spiralling effect that started from believing covid-related conspiracy theories to something more intense.  
         </p>
 
         <h2>Part Two: The Rabbit Hole</h2>
@@ -99,6 +104,19 @@
         </div>
 
         <h2>Part Four: Sentiment Analysis</h2>
+        <p>
+            Upon generating topics and their associated keywords, conducting sentiment analysis on those keyword sets would be a helpful next step. Besides giving us useful information about what emotions are associated with the topic keywords (and therefore with the articles that include them), we would also be able to identify interesting outliers (if any) in terms of positive sentiment conspiracy theories. We have selected a Hugging Face model to help us do this. It is called distilbert-base-uncased-emotion and for an input string, it displays that string's percentage distribution among 6 different emotions, namely love, joy, sadness, anger, surprise, and fear. We append this percentage distribution as metadata to each of our topic-keyword sets. Finally, for each of our topics, we used their primary emotion i.e. the emotion with the highest percentage to then plot a distribution of that topic versus their primary emotions.
+        </p>
+        <p>
+            For NMF: 3 topics classified as joy, 5 topics classified as fear, 2 topics classified as anger
+            For LSA: 3 topics classified as joy, 6 topics classified as fear, 1 topic classified as anger
+            For BertTopic: 80 topics classified as joy, 103 topics classified as fear, 77 topics classified as anger, 6 topics classified as sadness 
+        </p>
+        <p>
+            At the onset, we expected most (if not all) of these conspiracy theories to elicit negative expressions. This reasoning is mainly driven by personal experiences - where we interact/are exposed to these conspiracy theories in conversations, tabloid articles, social media posts, etc. Furthermore, the empirical observations made throughout the project are similar to the narrative presented i.e. the fear/stress-inducing conspiracy theories prevalent during COVID. 
+
+            However, we were surprised to see some of the topic cluster keywords having been classified as joy. This somewhat contradicted our above (initial) expectations. We could potentially rationalize this phenomenon as follows: looking at the keywords in isolation in conspiracy theories surrounding, let's say, music/art forms/royalty, etc. would be joyous since the net amount of text written about these topics would be intuitively considered to be positive albeit controversial. An example topic cluster classified as joy is "diana princess prince royal harry queen". In this example, besides focusing on the word 'princess', it generates a net positive sentiment considering the allusion to Princess Diana. Hence, we foreshadow that if the names/related words about a person who was well-liked (overall) was included in a topic cluster - with no other words overshadowing the net positive content written about that person outside - it could make the net sentiment classified for that cluster as positive. Hence, "diana princess prince royal harry queen" was classified as positive, but, based on our analysis, "diana princess tunnel death journalist" could be classified as negative.
+        </p>
 
         <h2>Part Five: Keyword Extraction</h2>
         <p>
