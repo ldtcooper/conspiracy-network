@@ -44,13 +44,14 @@
             The thing is, these articles don't end with "COVID is overblown."
             No, that is just where they start.
             Those articles lead Tom to more articles.
-            "COVID is overblown" leads into "The vaccine is full of microchips."
-            Who is putting these microchips in the vaccine?
-            The Illuminati are.
-            Why?
-            To usher in the New World Order.
-            How can we stop that?
-            We can show up at the Capitol on January 6th to Stop the Steal!
+            COVID skepticism leads to vaccine skepticism.
+            Articles about why vaccines are bad mention how they are used for population control.
+            Curious about what is going on with population control, Tom finds articles about how it is a means to the
+            end of ushering in the New World Order.
+            New World Order articles kept mentioning George Soros and the Deep State, so Tom started to read more about
+            those, and eventually articles about election interference started popping up in his feed.
+            Those ones started urging readers to show up at the US Capitol on January 6th, 2021, and the rest is
+            history.
         </p>
 
         <h2>Part Two: The Rabbit Hole</h2>
@@ -117,13 +118,79 @@
             Pattern mining is how sites like Amazon know what to recommend you buy with the items in your cart: by
             looking at thousands of carts, they might notice the pattern that most people who buy a phone charger put an
             extra cable in there.
+            These patterns are called "association rules" and they take the form of directed rules, e.g. charger =>
+            cable.
+            This means that an order with a charger in it is more likely to include a cable.
+            The reverse is not necessarily true: if someone is replacing a broken cable alone, they are not also going
+            to buy a charger.
             We use that same approach here, but with articles instead of shopping carts, and keywords instead of items.
+        </p>
+        <p>
+            Specifically, we use the <a href="https://en.wikipedia.org/wiki/Apriori_algorithm" target="_blank">apriori
+                algorithm</a> to build these rules.
+            While this algorithm can build rules of any length, we only generate rules of length two like the charger
+            example above, although our rules look more like "UFO => aliens."
+            We do this both for ease of visualization ("UFO => alien, atlantis" is harder to put on a chart) and to
+            identify discrete "jumps" that someone can take.
+            These "jumps" are what we were talking about in section one: where Tom goes from vaccines to microchips to
+            Illuminati.
+        </p>
+        <p>
+            In order to identify these "jumps", we created an interactive visualization, which you can see below.
+            Each node represents a keyword, and the size of the nodes is proportional to the number of occurrences of
+            that keyword.
+            The direction of tha arrows between the nodes denotes the direction of the association rule.
+            The thickness of the lines represents the strength of the relationship, measured with a metric called <a
+                href="https://en.wikipedia.org/wiki/Lift_(data_mining)" target="_blank"
+                rel="noopener noreferrer">lift</a>.
+            The slider at the top will adjust the lift threshold at which a line is drawn, so higher values will lead to
+            fewer lines.
+            See if you can find a path from COVID to something like "election interference."
+            You can double click on nodes to see only their connections and scroll to zoom in an out.
+            If you don't see anything, try zooming out.
         </p>
         <div class="iframe-wrapper">
             <iframe id="conspiracy-map" src="./web/conspiracy_map.html" frameborder="0"></iframe>
         </div>
+        <p>
+            By adjusting that threshold slider, we can also identify "clusters" of theories.
+            For example, as you move the slider up, chemtrails, global warming, climate change, and weather control all
+            end up in a cluster where they are only connected to each other.
+            Additionally, only keywords that were connected to anything under the least stringent threshold are
+            included.
+            A few keywords were not connected to anything else in the chart.
+            These fell into three classes.
+            The first was celebrity deaths: while their topics are closely connected, they tend to all occur in
+            isolation, e.g. no articles think that Michael Jackson's death is related to Tupac's.
+            The second was newer terms: things like "cultural Marxism" which don't show up much in the corpus which only
+            goes up to mid-2020.
+            Finally, we had a few surprises.
+        <ul>
+            <li>The keyword "2000 election" was not connected to any other political conspiracies, maybe because the
+                internet was less big during that time.</li>
+            <li>"Mayan calendar" wasn't connected to anything else, which is surprising because it was big in apocalypse
+                theories around 2012, which are present in the rest of the dataset.</li>
+            <li>"Crisis Actor" wasn't connected to any of the other mass shooting conspiracies despite <a
+                    href="https://apnews.com/article/shootings-school-gun-politics-alex-jones-9c924b7d9df23b2853d9771ec9fa4208">Alex
+                    Jones' insistence otherwise.</a></li>
+            <li>"Bermuda Triangle" wasn't connected to any alien conspiracy theories despite aliens being a major
+                explanation for mysterious disappearances there.</li>
+        </ul>
+        </p>
+        <p>
+            These keywords were validated manually by taking a sample of the articles and comparing their text to they
+            keywords that they generated.
+            In addition to guiding how we tuned KeyBERT's hyperparameters, this process also necessitated a few tweaks
+            to the keywords we were using.
+            Most notably, "alien" had to be removed because it was coming up on articles about extraterrestrials and
+            In that keyword tuning process, we also had to introduce a few double keywords, for example "COVID" and
+            "Coronavirus" which the algorithm didn't recognize as essentially synonyms.
+        </p>
+        <h2>Part Six: What Does this Mean?</h2>
+        <p>
+            In part two, we put forward three hypotheses.
 
-
+        </p>
     </main>
 
 </body>
