@@ -116,9 +116,145 @@
         </p>
 
         <h2>Part Three: Topic Modelling</h2>
+        <h3>Methods</h3>
+        <p>
+            Before modeling the data, we needed to clean and preprocess all the text data in the main corpus. The
+            following steps were taken:
+        </p>
+        <ol>
+            <li>Tokenize the words</li>
+            <li>Remove all stopwords, punctuations, and special characters</li>
+            <li>Convert the text to lowercase</li>
+            <li>Lemmatize the text, reducing each word to its root form</li>
+        </ol>
+        <p>
+            We then used Non-negative Matrix Factorization (NMF), Latent Dirichlet Allocation (LDA), Latent Semantic
+            Analysis (LSA), and BERTopic to perform topic modeling. These algorithms are described as follows:
+        </p>
+        <ul>
+            <li><strong>Non-negative Matrix Factorization (NMF):</strong> Aims to discover latent patterns in the data
+                by reducing its dimensionality while preserving its non-negativity constraints. In topic modeling, NMF
+                takes a document-term matrix as input, typically created using the Term Frequency-Inverse Document
+                Frequency (TF-IDF) representation, and extracts topics as linear combinations of the most significant
+                terms.</li>
+            <li><strong>Latent Dirichlet Allocation (LDA):</strong> A generative probabilistic model that seeks to
+                discover hidden topics in a collection of documents. It is based on the assumption that documents are
+                composed of a mixture of topics, and each topic is a probability distribution over words. By leveraging
+                the Dirichlet distribution to model the document-topic and topic-word relationships, LDA can uncover the
+                underlying structure of the data.</li>
+            <li><strong>Latent Semantic Analysis (LSA):</strong> Applies Singular Value Decomposition (SVD) to the
+                document-term matrix, often transformed using the TF-IDF representation. By retaining only the most
+                significant singular values and their corresponding singular vectors, LSA projects the high-dimensional
+                data into a lower-dimensional space, called the latent semantic space. This space captures the
+                underlying relationships between documents and terms, revealing hidden topics in the process.</li>
+            <li><strong>BERTopic:</strong> First leverages a pre-trained BERT model to create dense document embeddings
+                that capture the semantic meaning of the text. These embeddings are then reduced to a lower-dimensional
+                space using UMAP (Uniform Manifold Approximation and Projection) and clustered using the HDBSCAN
+                (Hierarchical Density-Based Spatial Clustering of Applications with Noise) algorithm. The resulting
+                clusters represent the topics described using the most relevant terms. BERTopic offers several
+                advantages for topic modeling, including improved semantic understanding, better handling of
+                context-dependent words, and the ability to capture fine-grained topics.</li>
+        </ul>
+        <p>
+            We then created an algorithm that measures the coherence scores across various topic sizes in order to
+            determine the optimal number of topics each algorithm should divide the words into. We generated graphs for
+            NMF, LSA, and LDA to visualize the coherence scores. BERTopic was not included in this step, as it
+            automatically generates the optimal number of topics and has demonstrated effective performance.
+        </p>
+
+
+        <h3>Results</h3>
+        <p>
+            Let us start by analyzing Non-negative Matrix Factorization (NMF) results. This is what the coherence graphs
+            for NMF look like. (NOTE: We broke up some of the graphs due to computational constraints; the x-axis
+            represents the number of topics, and the y-axis represents the Coherence Scores for all of these graphs)
+        </p>
+        <p>
+            <img src="nmf_graph1.png" alt="NMF Coherence Graph 1"
+                style="width: 45%; display: inline-block; margin-right: 10px;">
+            <img src="nmf_graph2.png" alt="NMF Coherence Graph 2" style="width: 45%; display: inline-block;">
+        </p>
+        <p>
+            So as you can see, this shows us that when we ask the model to model the text into 27 topics, the topics are
+            the most coherent. This is why we trained the LDA model with 27 topics; here are the top 5 topics; as you
+            can see, it did a good job of keeping the topics distinct (Index 1 had all of the outputs)
+        </p>
+        <p>
+            <img src="nmf_topics.png" alt="NMF Top 5 Topics" style="width: 100%; display: block; margin: 0 auto;">
+        </p>
+        <p>
+            This took a substantial amount of time to train but produced good results. It does a fairly good job of
+            creating results between topic sizes 10 and 40, which makes it more applicable in different scenarios.
+        </p>
+        <p>
+            Now let us move on to Latent Semantic Analysis (LSA); this is what the coherence graphs for LSA look like
+        </p>
+        <p>
+            <img src="lsa_graph1.png" alt="LSA Coherence Graph 1"
+                style="width: 45%; display: inline-block; margin-right: 10px;">
+            <img src="lsa_graph2.png" alt="LSA Coherence Graph 2" style="width: 45%; display: inline-block;">
+        </p>
+        <p>
+            As you can see, this technique gave the best results when the number of topics was 5. This performed worse
+            than the others giving a peak coherence score of only 0.54. This can be seen in the results below.
+            Additionally, it gives the best results for 5 topics. This is a very low number for a larger dataset. This
+            may have been caused due to a few reasons; LSA uses SVD, which makes it susceptible to noise which could
+            adversely affect its performance; furthermore, it assumes a linear relationship between terms and topics:
+            and documents and topics, which can limit its ability to capture more complex relationships. This was,
+            however, fairly quick to train compared to the other models.
+        </p>
+        <p>
+            <img src="lsa_topics.png" alt="LSA Top 5 Topics" style="width: 100%; display: block; margin: 0 auto;">
+        </p>
+        <p>
+            There is also a decent amount of overlap between the topics and we know that there can be more distinct
+            topics.
+        </p>
+        <p>
+            Let us now take a look at Latent Dirichlet Allocation (LDA); this is what the coherence graphs for LDA
+            looked like. (we have three graphs here as the second graph seemed to have a lot of upward momentum)
+        </p>
+        <p>
+            <img src="lda_graph.png" alt="LDA Coherence Graph 1"
+                style="width: 30%; display: inline-block; margin-right: 10px;">
+            <img src="lda_graph2.png" alt="LDA Coherence Graph 2"
+                style="width: 30%; display: inline-block; margin-right: 10px;">
+            <img src="lda_graph3.png" alt="LDA Coherence Graph 3" style="width: 30%; display: inline-block;">
+
+
+        </p>
+        <p>
+            This performs fairly well as you can see in the topics below.
+        </p>
+        <p>
+            <img src="lda_topics.png" alt="LDA Top 5 Topics" style="width: 100%; display: block; margin: 0 auto;">
+        </p>
+        <p>
+            This performed better than LSA but was significantly worse than NMF. This, however, took a fairly long time
+            to run, which makes it suboptimal to use for most scenarios where time is a concern. As the graphs show,
+            this is a very sensitive model and changes a lot based on hyperparameter tuning. It seems like the dataset
+            characteristics suit NMF the most so far.
+        </p>
+        <p>
+            Next up, we have BERTopic, which was fairly efficient and also gave the best results. As you can see below,
+            it was able to create 266 distinct topics, and we also created an intertopic distance map to be able to
+            visualize this data, and it gave us the best results as you can see below. It has a score of 0.75476.
+        </p>
+        <p>
+            <img src="bertopic_topics.png" alt="BERTopic Top 5 Topics"
+                style="width: 100%; display: block; margin: 0 auto;">
+        </p>
+        <p>
+            We also have the intertopic map (below) which you can access on the website that we have linked to the
+            project. It showed how much different topics related to one another and how prevalent/important they are
+            with respect to the entire dataset. The closer the two topic circles are, the more related they are, and the
+            larger the circle, the more prevalent it is. You can hover over the circles to find out what these topics
+            are.
+        </p>
         <div class="iframe-wrapper">
             <iframe id="topic-map" src="./web/intertopic_distance_map.html" frameborder="0"></iframe>
         </div>
+
 
         <h2>Part Four: Sentiment Analysis</h2>
         <p>
