@@ -25,7 +25,7 @@
     <header>
         <h1>Debunked! Analyzing the LOCO Conspiracy Corpus</h1>
         <span>By: <a href="https://www.logan-cooper.com/" target="_blank">Logan Cooper</a>, Dhyay Bhatt, Naman Parikh,
-            Kushagra Ghosh
+            <a href="https://www.linkedin.com/in/kushagraghosh/">Kushagra Ghosh</a>
         </span>
     </header>
     <main>
@@ -123,6 +123,24 @@
                 things or people like the New World Order, George Soros, or COVID.</li>
             <li>Most of these articles will display negative sentiment, e.g. anger or fear.</li>
         </ul>
+        </p>
+        <h3>Target Effect: </h3>
+        <p>
+            Topics for most conspiracy theories are related to political figures, public health issues (such as COVID-19), and aliens/UFOs, and so conspiracy theories can be 'clustered' based on these topics.
+        </p>
+        <h3>Expected Explanation: </h3>
+        <p>
+            The rise of political polarization and the echo-chamber effect of social media led to the formation of distinct groups of people who are increasingly isolated and hostile with each other, and therefore hold widely divergent views on political and social issues, which relates to their conspiracy theories beliefs.
+        </p>
+        <p>
+            Therefore, we expected that conspiracies from the data source would form a few tight clusters of topics with exclusively negative sentiment, such as a distinct election conspiracy cluster and a distinct public health cluster, with only a small number of weaker links between those broader topics (such as isolated conspiracy articles stating COVID was created by aliens). 
+        </p>
+        <h3>Unexpected Explanation:</h3>
+        <p>
+            The theories are more interconnected with each other than we expected. With a low lift threshold, we see association rules between many seemingly unrelated keywords (e.g. reptilians to Princess Diana). We have to raise the threshold far beyond just a positive correlation to get distinct clusters. In other words, we find that links between related conspiracies are stronger, but making large jumps between different is possible.
+        </p>
+        <p>
+            We also see many of the topic clusters for the conspiracy articles surprisingly corresponded with a predominantly positive sentiment. We could potentially rationalize this phenomenon as follows: Isolated keywords in topics such as music, art, and royalty can be perceived as positive yet controversial based to the net amount of articles written about them. For instance, the topic cluster "diana princess prince royal harry queen" generates a positive sentiment due to the allusion to Princess Diana. If a topic cluster includes names or related words about a well-liked person with no negative words, it could also be classified as positive. However, the sentiment can change when negative words are introduced (for example "diana princess tunnel death journalist.").
         </p>
 
         <h2>Part Three: Topic Modelling</h2>
