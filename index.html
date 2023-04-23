@@ -126,24 +126,40 @@
         </p>
         <h3>Target Effect: </h3>
         <p>
-            Topics for most conspiracy theories are related to political figures, public health issues (such as COVID-19), and aliens/UFOs, and so conspiracy theories can be 'clustered' based on these topics.
+            Topics for most conspiracy theories are related to political figures, public health issues (such as
+            COVID-19), and aliens/UFOs, and so conspiracy theories can be 'clustered' based on these topics.
         </p>
         <h3>Expected Explanation: </h3>
         <p>
-            The rise of political polarization and the echo-chamber effect of social media led to the formation of distinct groups of people who are increasingly isolated and hostile with each other, and therefore hold widely divergent views on political and social issues, which relates to their conspiracy theories beliefs.
+            The rise of political polarization and the echo-chamber effect of social media led to the formation of
+            distinct groups of people who are increasingly isolated and hostile with each other, and therefore hold
+            widely divergent views on political and social issues, which relates to their conspiracy theories beliefs.
         </p>
         <p>
-            Therefore, we expected that conspiracies from the data source would form a few tight clusters of topics with exclusively negative sentiment, such as a distinct election conspiracy cluster and a distinct public health cluster, with only a small number of weaker links between those broader topics (such as isolated conspiracy articles stating COVID was created by aliens). 
+            Therefore, we expected that conspiracies from the data source would form a few tight clusters of topics with
+            exclusively negative sentiment, such as a distinct election conspiracy cluster and a distinct public health
+            cluster, with only a small number of weaker links between those broader topics (such as isolated conspiracy
+            articles stating COVID was created by aliens).
         </p>
         <h3>Unexpected Explanation:</h3>
         <p>
-            The theories are more interconnected with each other than we expected. With a low lift threshold, we see association rules between many seemingly unrelated keywords (e.g. reptilians to Princess Diana). We have to raise the threshold far beyond just a positive correlation to get distinct clusters. In other words, we find that links between related conspiracies are stronger, but making large jumps between different is possible.
+            The theories are more interconnected with each other than we expected. With a low lift threshold, we see
+            association rules between many seemingly unrelated keywords (e.g. reptilians to Princess Diana). We have to
+            raise the threshold far beyond just a positive correlation to get distinct clusters. In other words, we find
+            that links between related conspiracies are stronger, but making large jumps between different is possible.
         </p>
         <p>
-            We also see many of the topic clusters for the conspiracy articles surprisingly corresponded with a predominantly positive sentiment. We could potentially rationalize this phenomenon as follows: Isolated keywords in topics such as music, art, and royalty can be perceived as positive yet controversial based to the net amount of articles written about them. For instance, the topic cluster "diana princess prince royal harry queen" generates a positive sentiment due to the allusion to Princess Diana. If a topic cluster includes names or related words about a well-liked person with no negative words, it could also be classified as positive. However, the sentiment can change when negative words are introduced (for example "diana princess tunnel death journalist.").
+            We also see many of the topic clusters for the conspiracy articles surprisingly corresponded with a
+            predominantly positive sentiment. We could potentially rationalize this phenomenon as follows: Isolated
+            keywords in topics such as music, art, and royalty can be perceived as positive yet controversial based to
+            the net amount of articles written about them. For instance, the topic cluster "diana princess prince royal
+            harry queen" generates a positive sentiment due to the allusion to Princess Diana. If a topic cluster
+            includes names or related words about a well-liked person with no negative words, it could also be
+            classified as positive. However, the sentiment can change when negative words are introduced (for example
+            "diana princess tunnel death journalist.").
         </p>
 
-        <h2>Part Three: Topic Modelling</h2>
+        <h2>Part Three: Topic Modelling, or Finding the Rabbit Hole</h2>
         <h3>Methods</h3>
         <p>
             Before modeling the data, we needed to clean and preprocess all the text data in the main corpus. The
@@ -335,7 +351,7 @@
             classified as negative.
         </p>
 
-        <h2>Part Five: Keyword Extraction</h2>
+        <h2>Part Five: Keyword Extraction, or Mapping the Rabbit Hole</h2>
         <p>
             Starting with the search terms that Miani et al. used to compile LOCO, we put together a list of 127
             keywords that captured a number of topics in the conspiracy world.
@@ -388,6 +404,7 @@
         </div>
         <p>
             By adjusting that threshold slider, we can also identify "clusters" of theories.
+            This amounts to increasing the lift threshold beyond the default we used, which was Lift = 1.1.
             For example, as you move the slider up, chemtrails, global warming, climate change, and weather control all
             end up in a cluster where they are only connected to each other.
             Additionally, only keywords that were connected to anything under the least stringent threshold are
@@ -423,7 +440,62 @@
         <h2>Part Six: What Does this Mean?</h2>
         <p>
             In part two, we put forward three hypotheses.
-
+            To recap, these were:
+        <ul>
+            <li>Conspiracy theories will 'cluster' together around certain topics, for example public health, political
+                figures, or phenomena like UFO sightings.</li>
+            <li>These clusters will be linked together by a few 'hub' conspiracies which easily tie into many others:
+                things or people like the New World Order, George Soros, or COVID.</li>
+            <li>Most of these articles will display negative sentiment, e.g. anger or fear.</li>
+        </ul>
+        And in short, we found the following:
+        <ul>
+            <li>
+                We do see clusters of conspiracy theories, but they are not especially distinct.
+                Instead, we see a few high-lift connections between terms, but those are embedded in a mesh of
+                lower-lift connections which link most terms to most other terms.
+                We can distill clusters out of this mesh by adjusting the lift threshold for drawing a rule.
+                When we do this, we see clusters for mass shootings, politics, public health, and extraterrestrials,
+                among others.
+                You can adjust the slider in part five to see this effect in action.
+            </li>
+            <li>
+                When we increase the lift threshold to get distinct clusters but not enough to completely split them
+                from each other, we see that they are connected at a few distinct points.
+                For example, at a lift level of 1.78 we see a cluster about the Middle East and another about (American)
+                politics.
+                These are connected by ISIS on the Middle East side and by Benghazi and Vladimir Putin on the politics
+                side.
+                Similarly, we see a cluster of conspiracies about secret organizations (Illuminati, New World Order,
+                Freemasons, Rothschilds); aliens (Extraterrestrials, UFOs, Reptilians, etc.); and religion (Bible, End
+                Times, Antichrist).
+                This cluster is also connected to the politics cluster, however, it is connected by a few terms that
+                almost form their own sub-cluster.
+                This "sub-cluster" is essentially a Q-Anon cluster with terms like Pizzagate, John Podesta, Jeffrey
+                Epstein, and Pedophilia.
+            </li>
+            <li>
+                While we did not run the entire corpus through sentiment analysis, we did do so with the keywords groups
+                as defined by our topic models.
+                This did result in a large amount of negative sentiment (e.g. fear and anger).
+                However, it also resulted in a surprisingly high amount of positive sentiment, specifically joy.
+                We can rationalize this by keeping in mind the fact that our approach feeds keywords into the algorithm
+                without the context of the articles.
+                This means that many groups of keywords about pop culture figures (especially musicians and royals) were
+                classified as positive due to the net sentiment of the text about them being positive.
+                Recall our example with Princess Diana from part four.
+            </li>
+        </ul>
+        </p>
+        <p>
+            Since we started with Tom, let us return to his story.
+            Our goal was to better understand how he could fall down a rabbit hole of conspiracies starting at COVID
+            skepticism and end up at election denial.
+            This approach has given us the foundation for a quantifiable way to follow Tom's story, and possibly even
+            predict how others might go down the same path.
+            It also tells us that Tom's path isn't the only one possible.
+            Instead of being one specific rabbit hole, the conspiracy literature is more like an entire rabbit warren:
+            with many ways to branch off from one idea into others.
         </p>
     </main>
 

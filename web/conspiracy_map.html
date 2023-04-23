@@ -9850,7 +9850,7 @@
       //adjust threshold
       function threshold() {
         let thresh = this.value;
-        document.getElementById('thresholdMarker').innerText = thresh;
+        document.getElementById('thresholdMarker').innerText = thresh + 1.1;
 
         // console.log('Setting threshold', thresh)
         graph.links.splice(0, graph.links.length);
@@ -9906,11 +9906,11 @@
     <form>
       <h3>
         Edge Threshold
-        0
+        1.1
         <input type="range" autocomplete="off" id="thresholdSlider" value="0" min="0" max="10" step="0.01">
         10
         --
-        <span id="thresholdMarker">0</span>
+        <span id="thresholdMarker">1.1</span>
       </h3>
     </form>
   </div>
